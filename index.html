@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script> -->
+    <script src="js/mqttws31.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+    <div class="space-vertical"></div>
+    <div class="container">
+        <button id="light_power" class="css-button-neumorphic light on" style="display: flexbox; justify-content: center; align-items: center;" onclick="handleLightPower()"><img style=" height: 100px; width: 100px;" src="images/luz.png"></button>
+    </div>
+<div class="space-vertical"></div>
+    <div class="container">
+        <div>
+            <button id="sound_power"  class="css-button-neumorphic sound power-sound off" onclick="handleSoundPower()"><img style=" height: 70px; width: 70px;" src="images/onoff.png"></button>
+        </div>
+
+        <div>
+            <button id="sound_mute"  class="css-button-neumorphic sound pressed" onclick="handleMute()"><img style=" height: 70px; width: 70px;" src="images/volume_mute_icon_159765.png"></button>
+
+        </div>
+        <div>
+            <button class="css-button-neumorphic sound volume-sound" onclick="pubVolDec()"><img style=" height: 70px; width: 70px;" src="images/volmenos.png"></button>
+
+        </div>
+        <div>
+            <a id="vol_status" class="caption-sound">-</a>
+        </div>
+        <div>
+            <button class="css-button-neumorphic sound volume-sound" onclick="pubVolInc()"><img style=" height: 70px; width: 70px;" src="images/volmas.png"></button>
+
+        </div>
+
+    </div>
+    <!-- <div>
+        <a> Valor a</a>
+        <a id="ValorA"></a>
+    </div> -->
+    <script src="js/iot-mqtt.js"></script>
+
+
+</body>
+
+</html>
