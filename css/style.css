@@ -7,7 +7,13 @@ body {
     overflow-y: hidden; 
 
 }
+body:hover{
+    cursor: none;
+}
+button:hover{
+    cursor: none;
 
+}
 .connect {
     position: absolute;
     width: 50px;
