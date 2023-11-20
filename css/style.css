@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(blue, rgb(120, 141, 248));
+    background: linear-gradient(rgb(14, 14, 15), rgb(137, 141, 159));
 }
 
 .container {
@@ -7,7 +7,9 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+img{
+    pointer-events: none;
+}
 .css-button-neumorphic {
     color: #691e1e;
     padding: 5px 10px;
@@ -55,6 +57,11 @@ body {
 
 .caption-sound {
     font-size: xxx-large;
+    -youbkit-touch-callout: none; /*iOS Safari*/
+    -youbkit-user-select: none;   /* Chrome 6.0+, Safari 3.1+, Edge y Opera 15+ */
+    -moz-user-select: none;    /*Firefox*/
+    -ms-user-select: none;        /* IE 10+ y Edge */
+    user-select: none;
 }
 
 .power-sound {
@@ -67,11 +74,11 @@ body {
     width: 150px;
 }
 .on {
-    box-shadow: 0px 0px 10px #05da4c
+    box-shadow: 0px 0px 100px #56ff8f
 }
 
 .off {
-    box-shadow: 0px 0px 10px #ff0f0f
+    box-shadow: 0px 0px 100px #ff0f0f
 }
 .pressed{
     background:#bcbcbc
