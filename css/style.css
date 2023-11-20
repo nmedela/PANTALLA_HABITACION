@@ -1,12 +1,17 @@
 body {
-    width: 100%;
-    height: inherit;
-    background: linear-gradient(rgb(14, 14, 15), rgb(137, 141, 159));
+    width: inherit;
+    height: 480px;
+    background: linear-gradient(rgb(14, 14, 15), rgb(137, 141, 159)) scroll;
+    background-repeat: space;
+    overflow-x: hidden; 
+    overflow-y: hidden; 
+
 }
 
 .connect {
     position: absolute;
- width: 50px;   
+    width: 50px;
+    height: 50px;   
 }
 .connected {
     display: none;
