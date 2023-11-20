@@ -18,20 +18,21 @@ function onConnect() {
   console.log("Conectado mqtt-WebSocket");
 
   client.subscribe("sound/status");
-  message = new Paho.MQTT.Message("Hello");
-  message.destinationName = "World";
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "set_input" }));
+  message.destinationName = "sound/action";
   client.send(message);
+
 }
 
 function pubVolInc() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "volume_inc" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "volume_inc" }));
   message.destinationName = "sound/action";
   message.qos = 0;
 
   client.send(message);
 }
 function pubVolDec() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "volume_dec" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "volume_dec" }));
   message.destinationName = "sound/action";
   message.qos = 0;
 
@@ -60,14 +61,15 @@ function handleMute(){
   console.log("pasa mute")
   elementSound = document.getElementById("sound_mute")
   if(elementSound.classList.contains('pressed')){
-    pubMuteOn()
-  }else{
+    console.log("contiene pressed")
     pubMuteOff()
+  }else{
+    pubMuteOn()
   }
 }
 
 function pubLightOn() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "power_on" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "power_on" }));
   message.destinationName = "light/action";
   message.qos = 0;
 
@@ -75,7 +77,7 @@ function pubLightOn() {
 }
 
 function pubLightOff() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "power_off" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "power_off" }));
   message.destinationName = "light/action";
   message.qos = 0;
 
@@ -83,7 +85,7 @@ function pubLightOff() {
 }
 
 function pubSoundOn() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "power_on" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "power_on" }));
   message.destinationName = "sound/action";
   message.qos = 0;
 
@@ -91,7 +93,7 @@ function pubSoundOn() {
 }
 
 function pubSoundOff() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "power_off" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "power_off" }));
   message.destinationName = "sound/action";
   message.qos = 0;
 
@@ -99,7 +101,7 @@ function pubSoundOff() {
 }
 
 function pubMuteOn() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "mute_on" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "mute_on" }));
   message.destinationName = "sound/action";
   message.qos = 0;
 
@@ -107,7 +109,8 @@ function pubMuteOn() {
 }
 
 function pubMuteOff() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "mute_off" }));
+  console.log("entra al off")
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "mute_off" }));
   message.destinationName = "sound/action";
   message.qos = 0;
 
@@ -115,14 +118,14 @@ function pubMuteOff() {
 }
 
 function pubLightOn() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "power_on" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "power_on" }));
   message.destinationName = "light/action";
   message.qos = 0;
 
   client.send(message);
 }
 function pubLightOff() {
-  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", value: "power_off" }));
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "power_off" }));
   message.destinationName = "light/action";
   message.qos = 0;
 
@@ -141,25 +144,40 @@ function onMessageArrived(message) {
   console.log(message.destinationName + " - " + message.payloadString);
   if (message.destinationName == "sound/status") {
     statusSound = JSON.parse(message.payloadString)
-    document.getElementById("vol_status").textContent = statusSound.volume
+    document.getElementById("vol_status").textContent = 47 + statusSound.volume
     if (statusSound.active) {
       elementSound = document.getElementById("sound_power")
       elementSound.classList.remove('off');
-      elementSound.className += "on";
+      elementSound.classList.add("on");
     } else {
       elementSound = document.getElementById("sound_power")
       elementSound.classList.remove('on');
-      elementSound.className += "off";
+      elementSound.classList.add("off");
     }
 
     if(statusSound.mute){
       elementSoundMute = document.getElementById("sound_mute")
-      elementSoundMute.classList.remove('pressed');
+      elementSoundMute.classList.add('pressed');
     }else{
+      console.log("mute está en off debería apagarse")
       elementSoundMute = document.getElementById("sound_mute")
-      elementSound.className += "pressed";
+      elementSoundMute.classList.remove('pressed');
 
     }
+  }
+
+  if (message.destinationName == "light/status") {
+    statusLight = JSON.parse(message.payloadString)
+    if (statusSound.active) {
+      statusLight = document.getElementById("light_power")
+      statusLight.classList.remove('off');
+      statusLight.classList.add("on");
+    } else {
+      statusLight = document.getElementById("light_power")
+      statusLight.classList.remove('on');
+      statusLight.classList.add("off");
+    }
+
   }
 }
 function onFailures() {

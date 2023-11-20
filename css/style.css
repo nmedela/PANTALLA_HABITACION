@@ -1,5 +1,5 @@
 body {
-    background-color: #d3d3d3;
+    background: linear-gradient(blue, rgb(120, 141, 248));
 }
 
 .container {
@@ -17,12 +17,11 @@ body {
     display: inline-block;
     outline: none;
     border-radius: 50px;
-    background: #f0f0f0;
+    background: lienar-gradient(gray, white);
 }
 
 .css-button-neumorphic:active {
     border-radius: 50px;
-    background: #bcbcbc;
     box-shadow: inset 1px 1px 3px #ffffff, inset -1px -1px 3px #fff;
 }
 
@@ -51,7 +50,7 @@ body {
     background-color: #f0f0f0;
     font-size: xx-large;
     
-    border-radius: 100px;
+    border-radius: 50px;
 }
 
 .caption-sound {
@@ -59,7 +58,7 @@ body {
 }
 
 .power-sound {
-    border-radius: 100px;
+    border-radius: 50px;
     height: 180px;
     width: 180px;
 }
