@@ -1,7 +1,15 @@
 body {
-    width: 800px;
-    height: 480px;
+    width: 100%;
+    height: inherit;
     background: linear-gradient(rgb(14, 14, 15), rgb(137, 141, 159));
+}
+
+.connect {
+    position: absolute;
+ width: 50px;   
+}
+.connected {
+    display: none;
 }
 
 .container {

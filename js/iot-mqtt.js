@@ -21,7 +21,8 @@ function onConnect() {
   var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "set_input" }));
   message.destinationName = "sound/action";
   client.send(message);
-
+  elementConnection = document.getElementById("connection")
+  elementConnection.classList.add('connected')
 }
 
 function pubVolInc() {
