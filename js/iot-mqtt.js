@@ -178,7 +178,7 @@ function onMessageArrived(message) {
 
     }
   }
-
+  console.log("arrive message ", message)
   if (message.destinationName == "light/status") {
     statusLight = JSON.parse(message.payloadString)
     if (statusSound.active) {
