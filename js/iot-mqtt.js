@@ -69,6 +69,11 @@ function handleMute(){
   }
 }
 
+function handleLightDimmer(value){
+  console.log("se apreto dimmer " + value)
+  pubScene(value)
+}
+
 function pubLightOn() {
   var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "power_on" }));
   message.destinationName = "light/action";
@@ -82,6 +87,13 @@ function pubLightOff() {
   message.destinationName = "light/action";
   message.qos = 0;
 
+  client.send(message);
+}
+
+function pubScene(value) {
+  var message = new Paho.MQTT.Message(JSON.stringify({ type: "action", command: "scene_" + value }));
+  message.destinationName = "light/action";
+  message.qos = 0;
   client.send(message);
 }
 

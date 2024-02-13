@@ -56,6 +56,10 @@ img{
     width: 10px;
 }
 
+.dimmer {
+ height: 100px;
+ z-index: 999;
+}
 
 .light {
     background-image: url(./images/luz.png) no-repeat;
