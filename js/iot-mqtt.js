@@ -1,7 +1,7 @@
 var clientId = "ws" + Math.random()
 
 // Create a client instance
-client = new Paho.MQTT.Client("192.168.100.99", 9001, clientId);
+client = new Paho.MQTT.Client("192.168.1.99", 9001, clientId);
 
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
